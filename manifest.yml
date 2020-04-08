@@ -1,0 +1,6 @@
+---
+  applications:
+    - name: smartFarms-mvp-01
+      memory: 64M
+      buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  
