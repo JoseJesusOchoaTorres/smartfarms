@@ -1,17 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 const Set = (props) => {
   return (
     <>
-      <div className='bx--row set__row-title'>
-        <h2 className='set__title'><strong>Set / {props.name}</strong></h2>
-      </div>
-      <div className='bx--row set__row-asd'>
-      </div>
+      <div className='bx--row set__row-asd' />
       <div className='bx--row set__row-images '>
         {props.images.map(image => {
           return (
-            <SetImage {...image} setname={props.name} />
+            <SetImage {...image} setname={props.name} key={image.id} />
           )
         })}
       </div>
@@ -37,4 +33,4 @@ const SetImage = (props) => {
   )
 }
 
-export default Set;
+export { Set, SetImage }

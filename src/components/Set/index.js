@@ -1,2 +1,1 @@
-import Set from './Set';
-export default Set;
+export * from './Set'

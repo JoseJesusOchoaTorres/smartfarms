@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom'
 import SfHeader from './components/SfHeader'
 import LandingPage from './content/LandingPage'
 import SetsPage from './content/SetsPage'
+import UploadPage from './content/UploadPage'
 
 class App extends Component {
   render () {
@@ -16,6 +17,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={LandingPage} />
             <Route path='/sets' component={SetsPage} />
+            <Route path='/upload' component={UploadPage} />
           </Switch>
         </Content>
       </>

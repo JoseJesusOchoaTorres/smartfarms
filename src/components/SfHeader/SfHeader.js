@@ -3,6 +3,7 @@ import {
   Header,
   HeaderName,
   HeaderNavigation,
+  HeaderMenu,
   HeaderMenuItem,
   SkipToContent
 } from 'carbon-components-react/lib/components/UIShell'
@@ -15,9 +16,16 @@ const SfHeader = () => (
       SmartFarms
     </HeaderName>
     <HeaderNavigation aria-label='Sets'>
-      <HeaderMenuItem element={Link} to='/sets'>
-        Sets
-      </HeaderMenuItem>
+      <HeaderMenu aria-label="Entrenar" menuLinkName="Entrenar">
+        <HeaderMenuItem element={Link} to='/upload'>Añadir</HeaderMenuItem>
+        {/* <HeaderMenuItem href="#">Entrenar</HeaderMenuItem> */}
+        <HeaderMenuItem element={Link} to='/sets'>Ver</HeaderMenuItem>
+      </HeaderMenu>
+      {/* <HeaderMenu aria-label="Analizar" menuLinkName="Analizar">
+        <HeaderMenuItem href="#">Añadir</HeaderMenuItem>
+        <HeaderMenuItem href="#">Analizar</HeaderMenuItem>
+        <HeaderMenuItem href="#">Ver</HeaderMenuItem>
+      </HeaderMenu> */}
     </HeaderNavigation>
   </Header>
 )

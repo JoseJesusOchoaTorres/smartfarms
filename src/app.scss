@@ -3,7 +3,10 @@
 @import 'carbon-components/scss/globals/scss/typography.scss';
 @import 'carbon-components/scss/globals/scss/vars.scss';
 
+@import './components/Set/_set.scss';
+@import './components/SetUploader/_set-uploader.scss';
+@import './components/SfHeader/sf-header.scss';
+
 @import './content/LandingPage/_landing-page.scss';
 @import './content/SetsPage/_sets-page.scss';
-@import './components/SfHeader/sf-header.scss';
-@import './components/Set/_set.scss'
+

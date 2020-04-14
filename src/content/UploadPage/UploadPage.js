@@ -1,5 +1,5 @@
 import React from 'react';
-import { Set } from '../../components/Set';
+import SetUploader from '../../components/SetUploader';
 
 const sets = [
   {
@@ -53,15 +53,15 @@ const sets = [
 ]
 const set = sets[0]
 
-const SetsPage = () => {
+const UploadPage = () => {
   return (
-    <div className='bx--grid bx--grid--full-width sets-page'>
-      <div className='bx--row setspage__row-title' >
-        <h2 className='sets-page__title'><strong>Ver imágenes / {set.name}</strong></h2>
+    <div className='bx--grid bx--grid--full-width upload-page'>
+      <div className='bx--row set__row-title'>
+        <h2 className='set__title'><strong>Subir imágenes / {set.name}</strong></h2>
       </div>
-      <Set {...set} />
+      <SetUploader {...set} />
     </div>
   )
 }
 
-export default SetsPage;
+export default UploadPage;

@@ -1,0 +1,36 @@
+.set-uploader__column-uploader {
+  padding: 1rem;
+}
+.set-uploader__column-images {
+
+}
+
+.set-uploader__file-uploader {
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: pre;
+  height: 136px;
+}
+
+.set-uploader__file-uploader::after {
+  content: url('/plus_sign.svg');
+  margin-bottom: 8px;
+}
+
+.set-uploader__submit-button {
+  width: 100%;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.set__feedback-item {
+  margin: 0.5rem 0;
+}
+.set__feedback-item-success {
+  color: blue
+}
+.set__feedback-item-error {
+  color: red
+}
