@@ -53,7 +53,7 @@ class SetUploader extends Component {
 
   upload = (file) => {
     const ClientID = 'e4142e156e13837'
-    const Clientsecret = 'd68bee62c0c90e5cc5c7b607a9a5254b4e36059b'
+    // const Clientsecret = 'd68bee62c0c90e5cc5c7b607a9a5254b4e36059b'
 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Client-ID " + ClientID);
