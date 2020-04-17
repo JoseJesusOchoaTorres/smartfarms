@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Button from 'carbon-components-react/lib/components/Button/Button'
 import { FileUploaderDropContainer } from 'carbon-components-react/lib/components/FileUploader'
 
+import {init} from  '../../analizer.js';
+
 class SetUploader extends Component {
   constructor () {
     super ()
@@ -39,12 +41,42 @@ class SetUploader extends Component {
     this.setState({feedback: feedback, images: filesFiltered})
   }
 
-  handleUpload = (evt) => {
+  _handleUpload = (evt) => {
     if(this.state.images.length > 0){
       this.setState({feedback: []})
       this.state.images.forEach(imagen => {
         this.upload(imagen)
       })
+    } else {
+      let f = [{type: 'error', message: 'Primero agrega imagenes'}]
+      this.setState({feedback: f})
+    }
+  }
+
+  handleUpload = (evt) => {
+    if(this.state.images.length > 0){
+      this.setState({feedback: []})
+      const imgs = document.querySelectorAll('.set__img')
+      init(imgs)
+        .then(result => {
+          console.log(result);
+          result.forEach(item => {
+            let data = {
+              id: item.prediction.id,
+              rankType: item.prediction.rankType,
+              scopeId: item.prediction.scopeId
+            }
+            
+            let f = {type: 'analizer', message: 'Imagen analizada', name:item.img.alt, data: data}
+            this.setState(state => {
+              const feedback = [...state.feedback, f];
+              return {
+                feedback
+              };
+            });
+          })
+        })
+      
     } else {
       let f = [{type: 'error', message: 'Primero agrega imagenes'}]
       this.setState({feedback: f})
@@ -159,13 +191,22 @@ const FeedbackItem = (item) => {
   if(item.type === 'error'){
     return (
       <>
-        <p className='set__feedback-item set__feedback-item-error'><strong>{item.name}</strong> {item.message}</p>
+        <p key={item.name} className='set__feedback-item set__feedback-item-error'><strong>{item.name}</strong> {item.message}</p>
       </>
     )
-  } else {
+  } 
+  if(item.type === 'success') { 
     return (
       <>
-        <p className='set__feedback-item set__feedback-item-success'><strong>{item.name}</strong> {item.message}</p>
+        <p key={item.name} className='set__feedback-item set__feedback-item-success'><strong>{item.name}</strong> {item.message}</p>
+      </>
+    )
+  } 
+  if(item.type === 'analizer') { 
+    return (
+      <>
+        <p key={item.name} className='set__feedback-item set__feedback-item-success'><strong>{item.name}</strong></p>
+        {Object.entries(item.data).map(i => <><p key={item.name+i[0]}><strong>{i[0]}:</strong> {i[1]}</p></> )}
       </>
     )
   }

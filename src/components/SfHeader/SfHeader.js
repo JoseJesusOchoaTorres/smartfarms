@@ -24,11 +24,11 @@ class SfHeader extends Component {
       type: 'HeaderMenu',
       text: 'Entrenar',
       subItems: [
-        {
-          type: 'HeaderMenuItem',
-          text: 'Añadir',
-          link: '/upload'
-        },
+        // {
+        //   type: 'HeaderMenuItem',
+        //   text: 'Añadir',
+        //   link: '/upload'
+        // },
         // {
         //   type: 'HeaderMenuItem',
         //   text: 'Entrenar',
@@ -47,7 +47,7 @@ class SfHeader extends Component {
       subItems: [
         {
           type: 'HeaderMenuItem',
-          text: 'Añadir',
+          text: 'Analizar',
           link: '/upload'
         },
         // {
@@ -55,11 +55,11 @@ class SfHeader extends Component {
         //   text: 'Entrenar',
         //   link: '/not-yet'
         // },
-        {
-          type: 'HeaderMenuItem',
-          text: 'Ver',
-          link: '/sets'
-        },
+        // {
+        //   type: 'HeaderMenuItem',
+        //   text: 'Ver',
+        //   link: '/sets'
+        // },
       ]
     }    
   ]
@@ -80,15 +80,18 @@ class SfHeader extends Component {
           {this.menuItems.map(item => {
             if(item.type === 'HeaderMenu'){
               return(
-                <HeaderMenu aria-label={item.text} menuLinkName={item.text} className={item === this.state.activeItem ? 'active' : ''}>
+                <HeaderMenu key={item.text} aria-label={item.text} menuLinkName={item.text} className={item === this.state.activeItem ? 'active' : ''}>
                   {item.subItems.map(subItem => {
                     return(
-                      <HeaderMenuItem element={Link} to={subItem.link} className={subItem === this.state.activeSubItem ? 'active' : ''} onClick={this.handleClick.bind(this, item, subItem)} >{subItem.text}</HeaderMenuItem>
+                      <HeaderMenuItem key={item.text+subItem.text} element={Link} to={subItem.link} className={subItem === this.state.activeSubItem ? 'active' : ''} onClick={this.handleClick.bind(this, item, subItem)} >{subItem.text}</HeaderMenuItem>
                     )
                   })}
                 </HeaderMenu>
               )
-          }
+            } else {
+              return <></>
+            }
+            
           })}
         </HeaderNavigation>
       </Header>

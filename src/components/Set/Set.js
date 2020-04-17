@@ -7,7 +7,7 @@ const Set = (props) => {
       <div className='bx--row set__row-images '>
         {props.images.map(image => {
           return (
-            <SetImage {...image} setname={props.name} key={image.id} />
+            <SetImage {...image} seturl={props.url} setname={props.name} key={image.id} />
           )
         })}
       </div>
@@ -20,12 +20,12 @@ const SetImage = (props) => {
     <>
       <div className='bx--col-md-2 set__img-container'>
         <div className='set__img-info'>
-          <p><strong>{`${props.setname} ${props.id}`}</strong></p>
+          <p><strong>{`${props.setname} ${props.name}`}</strong></p>
           <p><small>{`Tamaño: ${props.width}x${props.height}px`}</small></p>
         </div>
         <img
           className='set__img'
-          src={props.download_url}
+          src={`${props.seturl}${props.name}`}
           alt='Carbon illustration'
         />
       </div>
