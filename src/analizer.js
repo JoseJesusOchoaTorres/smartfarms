@@ -5,11 +5,16 @@ async function loadModel () {
   const model = await tf.loadLayersModel('/model/model.json')
   const layer = model.getLayer('activation_5')
 
-  return tf.model({ inputs: model.inputs, outputs: layer.output })
+  model.compile({ optimizer: 'rmsprop', metrics: ['accuracy'] })
+  
+  
+  return model
+  // return tf.model({ inputs: model.inputs, outputs: layer.output })
 }
 
 async function init (imgs) {
   const model = await loadModel() // tf.loadLayersModel('/model/model.json')
+  //const model = await tf.loadLayersModel('/model/model.json')
 
   let responses = []
 

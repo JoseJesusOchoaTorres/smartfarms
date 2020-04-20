@@ -10,13 +10,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  white-space: pre;
-  height: 136px;
+  // justify-content: space-evenly;
+  text-align: center;
+  height: 10rem;
 }
 
 .set-uploader__file-uploader::after {
   content: url('/plus_sign.svg');
-  margin-bottom: 8px;
+  // margin-bottom: 8px;
 }
 
 .set-uploader__submit-button {
@@ -33,4 +34,22 @@
 }
 .set__feedback-item-error {
   color: red
+}
+
+.set__img-result {
+  padding-bottom: .5rem;
+}
+
+.set__img-wrapper {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: pre;
+  padding: 1rem;
+}
+
+
+.set-uploader__loading-wrapper {
+  margin: 1rem 0;
 }
