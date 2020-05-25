@@ -41,3 +41,9 @@ main {
 .bx--content {
   padding: 0;
 }
+
+@media (min-width: 1056px) {
+  .hide-lg {
+    display: none;
+  }
+}
