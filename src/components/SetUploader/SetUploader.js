@@ -42,7 +42,7 @@ class SetUploader extends Component {
         return false
       }
     })
-    this.setState({ feedback: feedback, images: filesFiltered })
+    this.setState({feedback: feedback, images: filesFiltered});
   }
 
   resetForm = (evt) => {
@@ -129,10 +129,10 @@ class SetUploader extends Component {
             <div className='bx--file__container'>
               <div className='set-uploader__uploader-wrapper'>
                 <FileUploaderDropContainer
-                  disabled={this.state.pendingAnalysis > 0 ? 'disabled' : ''}
                   accept={this.validFormats}
                   labelText='Da click aquí o arrastra imagenes para comenzar'
                   multiple
+                  capture="camera"
                   className='set-uploader__file-uploader'
                   name='Img'
                   onAddFiles={this.onAddFiles}
@@ -141,10 +141,19 @@ class SetUploader extends Component {
                 />
               </div>
               {
-                ( (!this.state.clean && this.state.pendingAnalysis === 0) ?
-                <Button className='bx--btn--secondary set-uploader__submit-button' onClick={this.resetForm} >Limpiar</Button>
+                ((!this.state.clean && this.state.pendingAnalysis === 0) ?
+                <Button
+                  className='bx--btn--secondary set-uploader__submit-button'
+                  onClick={this.resetForm}>
+                    Limpiar
+                </Button>
                 : <>
-                  <Button className='set-uploader__submit-button' disabled={this.state.pendingAnalysis > 0 ? 'disabled' : ''} onClick={this.handleUpload}>Analizar</Button>
+                  <Button
+                    className='set-uploader__submit-button'
+                    disabled={this.state.images.length < 1}
+                    onClick={this.handleUpload}>
+                      Analizar
+                  </Button>
                 </>)
               }
               <div className='set-uploader__loading-wrapper'>
@@ -173,8 +182,9 @@ class SetUploader extends Component {
               </div>
               <div className='set-uploader__upload-feedback'>
                 {this.state.feedback.map(item => {
+                  console.log("item.name: ", item);
                   return (
-                    <FeedbackItem {...item} key={item.name} />
+                    <FeedbackItem {...item} key={item.message} />
                   )
                 })}
               </div>
@@ -234,21 +244,21 @@ const FeedbackItem = (item) => {
   if (item.type === 'error') {
     return (
       <>
-        <p key={item.name} className='set__feedback-item set__feedback-item-error'><strong>{item.name}</strong> {item.message}</p>
+        <p className='set__feedback-item set__feedback-item-error'><strong>{item.name}</strong> {item.message}</p>
       </>
     )
   }
   if (item.type === 'success') {
     return (
       <>
-        <p key={item.name} className='set__feedback-item set__feedback-item-success'><strong>{item.name}</strong> {item.message}</p>
+        <p className='set__feedback-item set__feedback-item-success'><strong>{item.name}</strong> {item.message}</p>
       </>
     )
   }
   if (item.type === 'analizer') {
     return (
       <>
-        <p key={item.name} className='set__feedback-item set__feedback-item-success'><strong>{item.name}</strong></p>
+        <p className='set__feedback-item set__feedback-item-success'><strong>{item.name}</strong></p>
         {Object.entries(item.data).map(i => <><p key={item.name + i[0]}><strong>{i[0]}:</strong> {i[1]}</p></>)}
       </>
     )

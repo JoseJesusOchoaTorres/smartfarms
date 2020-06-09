@@ -3,13 +3,8 @@ import React from 'react'
 const Set = (props) => {
   return (
     <>
-      <div className='bx--row set__row-asd' />
       <div className='bx--row set__row-images '>
-        {props.images.map(image => {
-          return (
-            <SetImage {...image} seturl={props.url} setname={props.name} key={image.id} />
-          )
-        })}
+        {props.images.map(image => <SetImage {...image} seturl={props.url} setname={props.name} key={image.name} /> )}
       </div>
     </>
   )
