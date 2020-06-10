@@ -124,84 +124,97 @@ class SetUploader extends Component {
   render() {
     return (
       <>
-        <div className='bx--row upload-set__row'>
-          <div className='bx--col-md-2 set-uploader__column-uploader'>
-            <div className='bx--file__container'>
-              <div className='set-uploader__uploader-wrapper'>
+        <div className="bx--row upload-set__row">
+          <div className="bx--col-md-2 set-uploader__column-uploader">
+            <div className="bx--file__container">
+              <div className="set-uploader__uploader-wrapper">
                 <FileUploaderDropContainer
+                  disabled={this.state.pendingAnalysis > 0}
                   accept={this.validFormats}
-                  labelText='Da click aquí o arrastra imagenes para comenzar'
+                  labelText="Da click aquí o arrastra imagenes para comenzar"
                   multiple
                   capture="camera"
-                  className='set-uploader__file-uploader'
-                  name='Img'
+                  className="set-uploader__file-uploader"
+                  name="Img"
                   onAddFiles={this.onAddFiles}
-                  role=''
+                  role=""
                   tabIndex={0}
                 />
               </div>
-              {
-                ((!this.state.clean && this.state.pendingAnalysis === 0) ?
+              {!this.state.clean && this.state.pendingAnalysis === 0 ? (
                 <Button
-                  className='bx--btn--secondary set-uploader__submit-button'
-                  onClick={this.resetForm}>
-                    Limpiar
+                  className="bx--btn--secondary set-uploader__submit-button"
+                  onClick={this.resetForm}
+                >
+                  Limpiar
                 </Button>
-                : <>
+              ) : (
+                <>
                   <Button
-                    className='set-uploader__submit-button'
-                    disabled={this.state.images.length < 1}
-                    onClick={this.handleUpload}>
-                      Analizar
+                    className="set-uploader__submit-button"
+                    disabled={this.state.pendingAnalysis > 0}
+                    onClick={this.handleUpload}
+                  >
+                    Analizar
                   </Button>
-                </>)
-              }
-              <div className='set-uploader__loading-wrapper'>
-                {((this.state.pendingAnalysis > 0) ? 
+                </>
+              )}
+              <div className="set-uploader__loading-wrapper">
+                {this.state.pendingAnalysis > 0 ? (
                   <InlineLoading
                     description="Analizando"
                     iconDescription="Active loading indicator"
-                    onSuccess={function noRefCheck(){}}
+                    onSuccess={function noRefCheck() {}}
                     status="active"
                     successDelay={1500}
                   />
-                  :
+                ) : (
                   <>
-                    {(Object.keys(this.state.analysisResults).length ? 
+                    {Object.keys(this.state.analysisResults).length ? (
                       <>
-                        <p><strong>Resultado del analisis</strong></p>
-                        <hr/>
-                        <p><strong>Mangos maduros:</strong> {this.state.analysisResults[0]}</p>
-                        <p><strong>Mangos verdes:</strong> {this.state.analysisResults[1]}</p>
+                        <p>
+                          <strong>Resultado del analisis</strong>
+                        </p>
+                        <hr />
+                        <p>
+                          <strong>Mangos maduros:</strong>{" "}
+                          {this.state.analysisResults[0]}
+                        </p>
+                        <p>
+                          <strong>Mangos verdes:</strong>{" "}
+                          {this.state.analysisResults[1]}
+                        </p>
                       </>
-                      :
+                    ) : (
                       <></>
                     )}
                   </>
                 )}
               </div>
-              <div className='set-uploader__upload-feedback'>
-                {this.state.feedback.map(item => {
+              <div className="set-uploader__upload-feedback">
+                {this.state.feedback.map((item) => {
                   console.log("item.name: ", item);
-                  return (
-                    <FeedbackItem {...item} key={item.message} />
-                  )
+                  return <FeedbackItem {...item} key={item.message} />;
                 })}
               </div>
             </div>
           </div>
-          <div className='bx--col-md-6 set-uploader__column-images'>
-            <div className='bx--row set__row-images '>
-              {this.state.images.map(image => {
+          <div className="bx--col-md-6 set-uploader__column-images">
+            <div className="bx--row set__row-images ">
+              {this.state.images.map((image) => {
                 return (
-                  <SetImageUploaded image={image} pendingAnalysis={this.state.pendingAnalysis} key={image.name} />
-                )
+                  <SetImageUploaded
+                    image={image}
+                    pendingAnalysis={this.state.pendingAnalysis}
+                    key={image.name}
+                  />
+                );
               })}
             </div>
           </div>
         </div>
       </>
-    )
+    );
   }
 }
 
